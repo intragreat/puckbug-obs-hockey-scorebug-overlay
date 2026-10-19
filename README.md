@@ -22,7 +22,7 @@ Runs on **Windows 10/11** and **macOS 12+**, entirely from its own folder: no ac
 
 ## What it looks like
 
-All from a real game (Fresno at Lake Tahoe, Oct 16, which went to overtime), replayed through PuckBug, except where noted.
+From a recorded game replayed through PuckBug, with the made-up teams and players of the demo's league (the Northpeak Junior Hockey League), except where noted.
 
 ### The scorebug
 
@@ -94,6 +94,7 @@ Fifteen, each with its own colors, edges and lettering, and every color adjustab
 ![On air](docs/previews/panel-onair.png)
 ![Setup](docs/previews/panel-setup.png)
 ![Settings](docs/previews/panel-settings.png)
+![Hotkeys](docs/previews/panel-hotkeys.png)
 
 ---
 
@@ -142,6 +143,11 @@ The Mac kit isn't signed by Apple yet, which is why step 2 is needed. A signed a
 
 Then add PuckBug to OBS: **[OBS-SETUP.md](OBS-SETUP.md)** (the overlay is a browser source at `http://127.0.0.1:8770/overlay`, 1920×1080; set OBS to 60 fps).
 
+### Updating and uninstalling
+
+- **Updating:** run the new **PuckBug-Setup-….exe** (Windows) over the old one, or unpack the new Mac kit and copy your old kit's `config`, `data` and `assets\ads` folders into it. Your settings, teams, rosters, hotkeys, ads, saved games, logs and recordings carry over. Close PuckBug first.
+- **Uninstalling:** close PuckBug and delete its folder (Windows: `%LOCALAPPDATA%\Programs\PuckBug` unless you chose another; Mac: wherever you unpacked it), and the PuckBug shortcuts on the Desktop and in the Start menu. It installs nothing else.
+
 ---
 
 ## Setting up your team (Settings tab)
@@ -168,6 +174,8 @@ Your corrections (arena name, rink feed, club schedule, additional teams) are re
 
 **Auto director:** on or off, and which steps it airs. See the [broadcaster guide](docs/BROADCASTER-GUIDE.md#the-auto-director-optional).
 
+**Hotkeys:** record new keys for any of them, add or remove them, or reset them to the defaults; saved hotkeys work at once. See the [broadcaster guide](docs/BROADCASTER-GUIDE.md#hotkeys).
+
 **League without a stats site:** some rinks only run live scoreboards. Enter your team's name and code; the scorebug, clock, penalties, names and game-day rosters work, and you paste the game link on game day.
 
 **Powered-by watermark:** the overlay shows "Scorebug powered by Intragreat Consulting" in the top right, clear of every other graphic. To remove it, enter your unlock code under **Settings → Powered-by watermark** (it stays off through restarts and updates). To get a code, contact Intragreat Consulting at [intragreat.com](https://intragreat.com).
@@ -192,6 +200,16 @@ PuckBug saves everything as it goes. If the computer or the window dies mid-game
 
 ---
 
+## Before you stream
+
+PuckBug draws the graphics; whether you may stream a game is between you, your league and the rink. Before the first stream from a rink:
+
+- **League and team rules:** many leagues have broadcast rules (an official streaming partner, or the home team's permission). Check yours.
+- **The rink:** ask before setting up cameras and running cables.
+- **Music:** commercial music played on the stream (between periods, say) can get the stream muted or taken down. Use music you have the rights to.
+- **Sponsors' ads:** use images and videos the sponsor has given you to use.
+- **Players' names:** they come from the league's own public game sheets; if a family asks for a player to be left out, fix the roster under Setup → Rosters.
+
 ## Where the data comes from
 
 - **The live feed:** TimeToScore's public scoreboard feed, the same connection the rink's own live page opens. One connection per game, no polling, a second or two behind the rink.
@@ -203,7 +221,7 @@ Nothing is sent anywhere. Everything is kept in the PuckBug folder: `config` for
 
 ## Rehearsing and checking
 
-- **The demo** (demo.bat / demo.command) replays a recorded game at 5× and runs every graphic by itself: about 20 minutes of the full package.
+- **The demo** (demo.bat / demo.command) replays a recorded game between two made-up teams at 5× and runs every graphic by itself: about 20 minutes of the full package.
 - **Practice** (practice.bat / practice.command) has no feed: drive everything from the panel and hotkeys.
 - **Replays** of any recording: every live game is saved to `recordings/` automatically; `--replay <file> --speed 10`, add `--from mm:ss` to jump in. Replays keep their own saved game.
 
@@ -227,4 +245,6 @@ Every run writes **`logs/<date>.log`**: everything in the panel's Log, plus each
 | No season stats or league scores | Edge or Chrome must be installed; check the status line under Setup → Season stats |
 | The game time is wrong | Settings → Current setup: clear **Club website schedule** to use TimeToScore's times |
 | Wrong logo or abbreviation | Setup → Teams & logos: add the feed's code under TimeToScore codes |
+| The Auto director airs nothing | Check the button says **Auto: on** (one click). The pregame cards need the game loaded from the schedule (a pasted link has no start time); lineups need your lines set; scores need **Update scores** |
+| A hotkey fires in another program too | Hotkeys work in every window. Move it to a key nobody else uses under **Settings → Hotkeys** |
 

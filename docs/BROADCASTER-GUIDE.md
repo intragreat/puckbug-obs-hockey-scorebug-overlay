@@ -34,6 +34,7 @@ PuckBug reads the rink's TimeToScore scoreboard. Everything the scorekeeper ente
 3. **Pregame checklist** (Setup tab): feed connected, rosters and season stats loaded, OBS connected.
 4. Press **New game** if the last game's goals are still on the scorebug. New game keeps penalties only if the scoreboard is showing them right now.
 5. Decide on the **Auto director**: the **Auto** button on the On air tab. Off, everything below is yours to air.
+6. First time streaming from a rink: check you're allowed to. Your league's and teams' broadcast rules, the rink's permission, and music: commercial music played on a stream (between periods, say) can get it muted or taken down.
 
 ### Before the puck drops
 
@@ -79,7 +80,7 @@ The board's intermission shows as **1ST INT**, **2ND INT**, **3RD INT** (before 
 ### Overtime and shootout
 
 - Overtime runs on your league's rules (Settings → Overtime rules). At even strength the scorebug shows **3-ON-3 OVERTIME** (or 4-on-4). A penalty in 3-on-3 overtime is a 4-on-3 power play; when it ends with the clock running, it shows **4-ON-4** until the next stoppage, then 3-on-3 again, as the rule plays it.
-- **Shootout:** the strip beside the scorebug shows each attempt (● goal, ✕ miss, ○ still to shoot), the round, and the winner once it's decided (**FRESNO MONSTERS WIN**, say), and stays up at the final. Still tied after the rounds, it goes on: **SUDDEN DEATH · ROUND 4**, and so on; after 8 rounds it shows the latest 8 with **+N** for the earlier ones.
+- **Shootout:** the strip beside the scorebug shows each attempt (● goal, ✕ miss, ○ still to shoot), the round, and the winner once it's decided (**GLACIER LAKE GRIZZLIES WIN**, say), and stays up at the final. Still tied after the rounds, it goes on: **SUDDEN DEATH · ROUND 4**, and so on; after 8 rounds it shows the latest 8 with **+N** for the earlier ones.
   - **It fills in by itself:** the scorekeeper's shootout entries (goals and misses, with the shooter) are read from TimeToScore's play-by-play every 20 seconds, and goals the scoreboard counts show at once.
   - **If TimeToScore is behind or wrong** (the scorekeeper fixes it later), enter attempts on the On air tab, **Period & clock → Shootout** row (goal/miss buttons for each team, Undo). What you enter stays until TimeToScore has the same number of attempts for that team, then TimeToScore's list takes over.
 
@@ -138,7 +139,7 @@ The **Ads** tab plays sponsors' images and videos on the overlay, one after anot
 
 PuckBug starts with Intragreat Consulting's sample ad in each size, as three playlists to try. Delete them when you have your own.
 
-1. **Files**: drop images (PNG, JPG, WebP, GIF, SVG) or videos (MP4, WebM) on the box, or choose them. This works from the iPad too. They're kept in `assetsads`, and updates keep them.
+1. **Files**: drop images (PNG, JPG, WebP, GIF, SVG) or videos (MP4, WebM) on the box, or choose them. This works from the iPad too. They're kept in `assets\ads`, and updates keep them.
 2. **Playlists**: make one, pick where it shows, add files in order, and set each one's seconds. A video is set to its own length. Tick **Loop** to keep it going, and **Sound** for a full-screen video with audio. Then **Save playlists**.
 3. **Plays by itself in**: tick **Pregame**, **Intermissions** or **After the final**. The playlist starts when that break begins and stops when the puck drops. **■ Stop ads** holds it off until the next break.
 4. **Preview** shows a playlist in the panel's preview (dashed outline, silent) without airing it. **Go live** then airs it. **▶ Air** airs one straight away. The On air tab has the same buttons under **Advertising**.
@@ -167,13 +168,7 @@ PuckBug starts with Intragreat Consulting's sample ad in each size, as three pla
 - **Auto: ON / OFF** decides whether playlists set for breaks start by themselves.
 - **Files**: **▶ Air** puts a single file up on its own (as full screen, lower third or corner) until you stop it, and **Preview** checks it first.
 
-Hotkeys can run all of it, in `confighotkeys.json`:
-- `{ "type": "adsPlay", "id": "<playlist id>" }`, with `"once": true` for once through;
-- `{ "type": "adsStop" }`, `{ "type": "adsStopAfter" }`, `{ "type": "adsPause" }`;
-- `{ "type": "adsNext", "delta": 1 }`, with `-1` for previous and `0` to restart the item;
-- `{ "type": "adsStopIn", "minutes": 5 }`, `{ "type": "adsAuto", "on": false }`.
-
-The playlist ids are in `configads.json`.
+**Hotkeys** can run them too: under **Settings → Hotkeys**, pick *Air an ad playlist* (and which), *Stop ads*, *Stop ads after this item*, *Pause / resume ads*, *Next ad* or *Previous ad*.
 
 **Powered-by watermark**: the overlay shows "Scorebug powered by" with the Intragreat Consulting logo in the top right, where no other graphic goes. Only a full-screen ad covers it. To remove it, enter your code under **Settings → Powered-by watermark**. Once unlocked, that PuckBug keeps it off through restarts, and the same box can show or hide it again.
 
@@ -199,13 +194,21 @@ Turn it on with the **Auto** button (On air → Graphics) or under **Settings �
 | 8:00 into the 2nd intermission | Standings | 25 s |
 | 15 s after the final horn, one after another | Final summary, three stars, player of the game, scores, upcoming schedule | 50 s, 25 s, 20 s, pages, 20 s |
 
-Intermission steps follow the scoreboard's intermission clock and only start once the game has begun (a flood before puck drop doesn't count). Steps with nothing to show are skipped: lineups need your lines set, scores need Update scores. The Auto director never airs a milestone: those are always your call.
+Intermission steps follow the scoreboard's intermission clock (a rink without one: 15 minutes by the wall clock) and only start once the game has begun (a flood before puck drop doesn't count). Steps with nothing to show are skipped: lineups need your lines set, scores need Update scores, and a card with nothing in it (no upcoming games yet, no season stats) isn't aired. Your power-play unit waits for the penalty and POWER PLAY announcements to finish, then airs while the power play lasts. The Auto director never airs a milestone: those are always your call.
+
+**Is it on?** One click on **Auto** turns it on (a second click a moment later is ignored, so a double click doesn't switch it straight off). Next to the button it says what it's airing or what's next. The pregame steps need the game's start time: load tonight's game from the schedule (Setup → Game setup); a pasted game link has no start time, and the status says so.
 
 ---
 
 ## Hotkeys
 
-They work while OBS has focus. Remove the same keys from OBS's own hotkeys so both don't fire.
+They work in every window, OBS included. Remove the same keys from OBS's own hotkeys so both don't fire.
+
+**Change them under Settings → Hotkeys:** click a key combination and press the new one (PuckBug's hotkeys hold off while you do, so pressing Ctrl+H there doesn't add a goal), pick what it does and for which team, then **Save hotkeys**: they work at once. **+ Add hotkey** adds one, ✕ removes one, **Reset to defaults** puts them all back. A warning marks keys other programs use: Ctrl+A is Select all, Ctrl+C Copy, Ctrl+T a new tab. Pressing one of those in another program fires PuckBug's hotkey too, so for goals a key nobody else uses (Ctrl+Shift+…, the number pad, F-keys) is safer. After the final, a goal key does nothing.
+
+![Settings → Hotkeys](previews/panel-hotkeys.png)
+
+The defaults:
 
 | Keys | Does |
 |---|---|
